@@ -1,0 +1,1 @@
+nuitka --standalone --onefile --remove-output --output-dir=.\ t.py
