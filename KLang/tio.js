@@ -1,5 +1,5 @@
-class Tio{
-    println(text){
+class Tio {
+    println(text) {
         console.log(text)
     }
 }

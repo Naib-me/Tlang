@@ -6,22 +6,22 @@ tab = 0
 tab_cun = 0
 init(autoreset=True)  # autoreset=True会在每次打印后重置颜色
 lines = 0
-tool.newDep("path", open("./KLang/w.txt", 'r', encoding="utf-8").read())
+# tool.newDep("path", open("./KLang/w.txt", 'r', encoding="utf-8").read())
 
 shell = sys.argv[1::]
 if shell[0] == "v":
     art = """
-                         ______________
-                        |______________|
-                              | |
-                              | |
-                              | |
-                              | |
-                              |_|
+                         _______________
+                        |_______________|
+                               | |
+                               | |
+                               | |
+                               | |
+                               |_|
                               
-     Releases: Tlang 0.1.0      Version classification: Beta
+     Releases: Tlang 0.1.1      Version classification: Beta
     """
-    tool.newDep("tio",open("./KLang/tio.js",'r',encoding='utf-8').read())
+    # tool.newDep("tio",open("./KLang/tio.js",'r',encoding='utf-8').read())
 
     print(art)
 elif shell[0] == "run":
@@ -56,9 +56,37 @@ elif shell[0] == "run":
                     except:
                         print(Fore.RED + f"ERR:using关键字使用错误!({lines})")
                 elif x[0] == "var":   # var name = "name"
+                    while tab >= 1:
+                        run.write("\t")
+                        tab -= 1
+                    tab = tab_cun
                     varName = tool.extract_content_between(stripped_line,"var","=")
                     varText = tool.get_content_from_char(stripped_line,"=")
                     run.write(f"var {varName} = {varText}\n")
+                elif x[0] == "fn":   # fn name var,var,var
+                    fnname = x[1]    # {
+                    fnxingcan = tool.get_content_from_char(stripped_line,x[1])
+                    while tab >= 1:
+                        run.write("\t")
+                        tab -= 1
+                    tab = tab_cun
+                    run.write(f"function {fnname}({fnxingcan})\n")
+                elif x[0] == "}":
+                    tab -= 1
+                    tab_cun -= 1
+                    while tab >= 1:
+                        run.write("\t")
+                        tab -= 1
+                    tab = tab_cun
+                    run.write("}\n")
+                elif x[0] == "{":
+                    while tab >= 1:
+                        run.write("\t")
+                        tab -= 1
+                    tab = tab_cun
+                    run.write("{\n")
+                    tab += 1
+                    tab_cun += 1
                 else:
                     run.write(line + "\n")
     run.close()
