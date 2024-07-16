@@ -21,7 +21,7 @@ if shell[0] == "v":
                               
      Releases: Tlang 0.1.2      Version classification: Beta
     """
-    # tool.newDep("tio",open("./KLang/tio.js",'r',encoding='utf-8').read())
+    tool.newDep("tio",open("./KLang/tio.js",'r',encoding='utf-8').read())
 
     print(art)
 elif shell[0] == "run":
@@ -63,14 +63,14 @@ elif shell[0] == "run":
                     varName = tool.extract_content_between(stripped_line,"var","=")
                     varText = tool.get_content_from_char(stripped_line,"=")
                     run.write(f"var {varName} = {varText}\n")
-                elif x[0] == "fn":   # fn name var,var,var
-                    fnname = x[1]    # {
-                    fnxingcan = tool.get_content_from_char(stripped_line,x[1])
+                elif x[0] == "fn":   # fn name (var,var)
+                    fnName = tool.extract_content_between(stripped_line,"fn","(")
+                    fnXinfCan = tool.extract_content_between(stripped_line,"(",")")
                     while tab >= 1:
                         run.write("\t")
                         tab -= 1
                     tab = tab_cun
-                    run.write(f"function {fnname}({fnxingcan})\n")
+                    run.write(f"function {fnName} ({fnXinfCan})\n")
                 elif x[0] == "}":
                     tab -= 1
                     tab_cun -= 1
@@ -87,6 +87,26 @@ elif shell[0] == "run":
                     valName = tool.extract_content_between(stripped_line, "val", "=")
                     valText = tool.get_content_from_char(stripped_line, "=")
                     run.write(f"const {valName} = {valText}\n")
+                elif x[0] == "class":
+                    try:
+                        while tab >= 1:
+                            run.write("\t")
+                            tab -= 1
+                        tab = tab_cun
+                        run.write(f"class {x[1]}\n")
+                    except:
+                        print(Fore.RED + f"ERR:创建类的操作出现错误(line:{lines})")
+                        exit()
+                elif x[0] == "classObj":
+                    CBName = tool.extract_content_between(stripped_line, "classObj", "(")
+                    CBXinfCan = tool.extract_content_between(stripped_line, "(", ")")
+                    while tab >= 1:
+                        run.write("\t")
+                        tab -= 1
+                    tab = tab_cun
+                    run.write(f"{CBName} ({CBXinfCan})\n")
+                elif x[0] == "object": # object class() link onjname
+                    pass
                 elif x[0] == "{":
                     while tab >= 1:
                         run.write("\t")

@@ -1,9 +1,13 @@
 using tio
 
-fn h v
+class Tool
 {
-    var hw = "Hello world!"
-    tio.println(hw)
+    classObj foo ()
+    {
+        tio.println("Hello")
+    }
 }
 
-h('void')
+tool = new Tool()
+
+tool.foo()

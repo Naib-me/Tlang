@@ -8,4 +8,3 @@ class Tio {
 }
 
 tio = new Tio()
-const a = 1
