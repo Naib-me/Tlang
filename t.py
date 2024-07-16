@@ -19,7 +19,7 @@ if shell[0] == "v":
                                | |
                                |_|
                               
-     Releases: Tlang 0.1.1      Version classification: Beta
+     Releases: Tlang 0.1.2      Version classification: Beta
     """
     # tool.newDep("tio",open("./KLang/tio.js",'r',encoding='utf-8').read())
 
@@ -79,6 +79,14 @@ elif shell[0] == "run":
                         tab -= 1
                     tab = tab_cun
                     run.write("}\n")
+                elif x[0] == "val":
+                    while tab >= 1:
+                        run.write("\t")
+                        tab -= 1
+                    tab = tab_cun
+                    valName = tool.extract_content_between(stripped_line, "val", "=")
+                    valText = tool.get_content_from_char(stripped_line, "=")
+                    run.write(f"const {valName} = {valText}\n")
                 elif x[0] == "{":
                     while tab >= 1:
                         run.write("\t")
