@@ -19,7 +19,7 @@ if shell[0] == "v":
                                | |
                                |_|
                               
-     Releases: Tlang 0.1.2      Version classification: Beta
+     Releases: Tlang 0.1.3      Version classification: Beta
     """
     tool.newDep("tio",open("./KLang/tio.js",'r',encoding='utf-8').read())
 
