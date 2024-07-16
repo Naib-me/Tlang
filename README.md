@@ -1,5 +1,5 @@
 # Tlang
-<div style="width: 10%; margin: auto;"> 
+<div style="width: 2%; margin: auto;"> 
   <img src="./md/logo.png">
 </div>
 
